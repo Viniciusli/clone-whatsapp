@@ -15,131 +15,111 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: header,
-        body: const Home(),
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xff128C7E),
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.camera_alt)),
+                Tab(text: "CONVERSAS"),
+                Tab(text: "STATUS"),
+                Tab(text: "CHAMADAS"),
+              ],
+            ),
+            title: const Text('WhatsApp'),
+            actions: [
+              Row(children: const [
+                Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                Icon(
+                  Icons.more_vert,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 8,
+                )
+              ])
+            ],
+          ),
+          body: TabBarView(
+            children: <Widget>[
+              Icon(Icons.camera_alt),
+              Chat(),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-AppBar header = AppBar(
-  leading:  Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: const [
-      Text(
-        'WhatsApp',
-        style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-        ),
-      ),
-    ],
-  ),
-  leadingWidth: 200,
-  elevation: 0,
-  actions: [
-    Row(
-      children: const [
-        Icon(
-          Icons.search,
-          color: Colors.white,
-        ),
-        Icon(
-          Icons.more_vert,
-          color: Colors.white,
-        ),
-        SizedBox(width: 8,)
-      ]
-    )
-  ],
-  backgroundColor: Color(0xff128C7E),
-);
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
+class ListViewHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        navigationBar,
-        listMessages,
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: const <Widget>[
+        Text('List 1'),
+        Text('List 2'),
+        Text('List 3'),
       ],
     );
   }
 }
 
-Widget navigationBar = Container(
-  color: Color(0xff128C7E),
-  height: 45,
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(
-                Icons.camera_alt,
-                color: Color(0xffECE5DD),
+class Chat extends StatefulWidget {
+  @override
+  ChatState createState() {
+    return new ChatState();
+  }
+}
+
+class ChatState extends State<Chat> {
+  @override
+  Widget build(BuildContext context) {
+    // ignore: unnecessary_new
+    return new ListView.builder(
+      itemBuilder: (context, i) => Column(
+        children: <Widget>[
+          Divider(
+            height: 10,
+          ),
+          new ListTile(
+            leading: new CircleAvatar(
+              foregroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Colors.grey,
+              backgroundImage: new NetworkImage(
+                  'https://4maos.com.br/wp-content/uploads/2022/06/c61aaca8201efb68d7b1346888f9a52c.jpg'),
             ),
-          ],
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
-            'CONVERSAS',
-            style: TextStyle(
-              color: Color(0xffFFFFFF),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+            title: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
+                  'Nome',
+                  style: new TextStyle(fontWeight: FontWeight.bold),
+                ),
+                new Text(
+                  '20:45',
+                  style: new TextStyle(color: Colors.grey, fontSize: 14),
+                )
+              ],
             ),
-          )
+            subtitle: new Container(
+              padding: EdgeInsets.only(top: 5),
+              child: Text(
+                'mensagem de text',
+                style: TextStyle(color: Colors.grey, fontSize: 15),
+              ),
+            ),
+          ),
         ],
       ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
-              'STATUS',
-              style: TextStyle(
-                color: Color(0xffECE5DD),
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-            ),
-          )
-        ],
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
-            'CHAMADAS',
-            style: TextStyle(
-              color: Color(0xffECE5DD),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          )
-        ],
-      ),
-    ],
-  ),
-);
-
-Widget listMessages = Container(
-  child: ListView(
-    padding: EdgeInsets.all(8),
-    children: [
-      Text('messagem 1'),
-      Text('messagem 2'),
-      Text('messagem 3'),
-      Text('messagem 4'),
-    ],
-  ),
-);
-
-
-
+    );
+  }
+}
