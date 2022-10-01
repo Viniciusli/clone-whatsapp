@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './pages/chat.dart';
 import './pages/status.dart';
+import './pages/chamadas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,6 +9,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  // static const List<Icon> _iconsFloatingButtom = [
+  //   Icon(Icons.camera_alt),
+  //   Icon(Icons.chat),
+  //   Icon(Icons.camera_alt),
+  //   Icon(Icons.call_sharp)
+  // ];
 
   // This widget is the root of your application.
   @override
@@ -38,6 +45,9 @@ class MyApp extends StatelessWidget {
                   Icons.search,
                   color: Colors.white,
                 ),
+                SizedBox(
+                  width: 12,
+                ),
                 Icon(
                   Icons.more_vert,
                   color: Colors.white,
@@ -53,9 +63,14 @@ class MyApp extends StatelessWidget {
               Icon(Icons.camera_alt),
               Chat(),
               Status(),
-              Icon(Icons.directions_bike),
+              Chamadas(),
             ],
           ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () {},
+          //   backgroundColor: const Color(0xff128C7E),
+          //   child: _iconsFloatingButtom[],
+          // ),
         ),
       ),
     );
